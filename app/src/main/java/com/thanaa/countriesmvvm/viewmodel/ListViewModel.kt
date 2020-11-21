@@ -11,12 +11,12 @@ class ListViewModel:ViewModel() {
     val countryLoadError = MutableLiveData<Boolean>()
     val  loading = MutableLiveData<Boolean>()
 
-    fun fetch(){
+    fun refresh(){
         fetchCountries()
     }
 
     private fun fetchCountries(){
-        var mockData:List<Country> = listOf(Country("Saudi"),Country("US"))
+        var mockData:List<Country> = listOf(Country("Saudi"),Country("US"),Country("Germany"))
         countryLoadError.value = false
         loading.value =false
         countries.value = mockData
