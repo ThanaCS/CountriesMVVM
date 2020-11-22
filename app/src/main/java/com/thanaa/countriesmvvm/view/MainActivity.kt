@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.refresh()
 
         countriesList.apply {
-        layoutManager = GridLayoutManager(context,2)
+        layoutManager = LinearLayoutManager(context)
         adapter = countriesAdapter
         }
 
@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity() {
 
        viewModel.countries.observe(this,Observer { countries ->
            countries?.let {
+               countriesList.visibility = View.VISIBLE
                countriesAdapter.updateCounties(it)
+
            }
        })
 
