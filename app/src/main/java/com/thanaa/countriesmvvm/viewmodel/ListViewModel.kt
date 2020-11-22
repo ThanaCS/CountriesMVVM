@@ -2,18 +2,22 @@ package com.thanaa.countriesmvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.thanaa.countriesmvvm.di.DaggerApiComponent
 import com.thanaa.countriesmvvm.model.CountriesService
 import com.thanaa.countriesmvvm.model.Country
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
 class ListViewModel:ViewModel() {
-    private val countriesService = CountriesService()
+    @Inject
+    lateinit var  countriesService:CountriesService
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
     //disposable for cleaning the connection
     private val disposable = CompositeDisposable()
     val countries = MutableLiveData<List<Country>>()

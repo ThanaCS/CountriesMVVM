@@ -1,6 +1,7 @@
 package com.thanaa.countriesmvvm.di
 
 import com.thanaa.countriesmvvm.model.CountriesAPI
+import com.thanaa.countriesmvvm.model.CountriesService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -18,5 +19,9 @@ private val BASE_URL = "https://raw.githubusercontent.com"
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(CountriesAPI::class.java)
+    }
+    @Provides
+    fun provideCountryService():CountriesService{
+    return CountriesService()
     }
 }
