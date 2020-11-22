@@ -1,21 +1,19 @@
 package com.thanaa.countriesmvvm.model
 
 import com.google.gson.Gson
+import com.thanaa.countriesmvvm.di.DaggerApiComponent
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class CountriesService {
-    private val BASE_URL = "https://raw.githubusercontent.com"
-    private val api:CountriesAPI
+
+    @Inject
+    lateinit var  api:CountriesAPI
     init {
-        api= Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(CountriesAPI::class.java)
+    DaggerApiComponent.create().inject(this)
     }
 
     fun getCountries(): Single<List<Country>> {
